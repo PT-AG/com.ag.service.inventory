@@ -1,0 +1,10 @@
+FROM microsoft/aspnetcore-build:2.0.2
+WORKDIR /app
+
+COPY Com.Ambassador.Service.Inventory.Lib/*.csproj ./Com.Ambassador.Service.Inventory.Lib/
+COPY Com.Ambassador.Service.Inventory.WebApi/*.csproj ./Com.Ambassador.Service.Inventory.WebApi/
+RUN dotnet restore ./Com.Ambassador.Service.Inventory.WebApi/
+
+COPY Com.Ambassador.Service.Inventory.Lib/. ./Com.Ambassador.Service.Inventory.Lib/
+COPY Com.Ambassador.Service.Inventory.WebApi/. ./Com.Ambassador.Service.Inventory.WebApi/
+RUN dotnet publish ./Com.Ambassador.Service.Inventory.WebApi/ --output /out/ --configuration Release
