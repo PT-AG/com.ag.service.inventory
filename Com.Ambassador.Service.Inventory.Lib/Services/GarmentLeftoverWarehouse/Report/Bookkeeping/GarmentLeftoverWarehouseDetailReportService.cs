@@ -154,10 +154,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                    select new GarmentLeftoverWarehouseDetailReportViewModel
                                    {
                                        Description = "SALDO AWAL",
-                                       Unit2aQty = b.UnitCode == "C2A" ? b.Quantity : 0,
-                                       Unit2aPrice = b.UnitCode == "C2A" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit2bQty = b.UnitCode == "C2B" ? b.Quantity : 0,
-                                       Unit2bPrice = b.UnitCode == "C2B" ? b.Quantity * b.BasicPrice : 0,
+                                       Unit2aQty = b.UnitCode == "AG1" ? b.Quantity : 0,
+                                       Unit2aPrice = b.UnitCode == "AG1" ? b.Quantity * b.BasicPrice : 0,
+                                       Unit2bQty = b.UnitCode == "AG2" ? b.Quantity : 0,
+                                       Unit2bPrice = b.UnitCode == "AG2" ? b.Quantity * b.BasicPrice : 0,
                                        Unit2cQty = b.UnitCode == "C2C" ? b.Quantity : 0,
                                        Unit2cPrice = b.UnitCode == "C2C" ? b.Quantity * b.BasicPrice : 0,
                                        Unit1aQty = b.UnitCode == "C1A" ? b.Quantity : 0,
@@ -174,10 +174,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                           select new GarmentLeftoverWarehouseDetailReportViewModel
                                           {
                                               Description = "SALDO AWAL",
-                                              Unit2aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2A" ? b.Quantity : 0,
-                                              Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2A" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit2bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2B" ? b.Quantity : 0,
-                                              Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2B" ? b.Quantity : 0) * b.BasicPrice,
+                                              Unit2aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0,
+                                              Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
+                                              Unit2bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0,
+                                              Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
                                               Unit2cQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
                                               Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
                                               Unit1aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
@@ -196,10 +196,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                               select new GarmentLeftoverWarehouseDetailReportViewModel
                                               {
                                                   Description = "SALDO AWAL",
-                                                  Unit2aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2A" ? -b.Quantity : 0,
-                                                  Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2A" ? -b.Quantity : 0) * b.BasicPrice,
-                                                  Unit2bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2B" ? -b.Quantity : 0,
-                                                  Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2B" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  Unit2aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG1" ? -b.Quantity : 0,
+                                                  Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG1" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  Unit2bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.Quantity : 0,
+                                                  Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.Quantity : 0) * b.BasicPrice,
                                                   Unit2cQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0,
                                                   Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0) * b.BasicPrice,
                                                   Unit1aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0,
@@ -217,10 +217,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                    select new GarmentLeftoverWarehouseDetailReportViewModel
                                    {
                                        Description = "TOTAL PENERIMAAN",
-                                       Unit2aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2A" ? b.Quantity : 0,
-                                       Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2A" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit2bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2B" ? b.Quantity : 0,
-                                       Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2B" ? b.Quantity : 0) * b.BasicPrice,
+                                       Unit2aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0,
+                                       Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
+                                       Unit2bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0,
+                                       Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
                                        Unit2cQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
                                        Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
                                        Unit1aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
@@ -240,10 +240,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        select new GarmentLeftoverWarehouseDetailReportViewModel
                                        {
                                            Description = "U/" + a.ExpenditureDestination,
-                                           Unit2aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2A" ? b.Quantity : 0,
-                                           Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2A" ? b.Quantity : 0) * b.BasicPrice,
-                                           Unit2bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2B" ? b.Quantity : 0,
-                                           Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2B" ? b.Quantity : 0) * b.BasicPrice,
+                                           Unit2aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG1" ? b.Quantity : 0,
+                                           Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
+                                           Unit2bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.Quantity : 0,
+                                           Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
                                            Unit2cQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0,
                                            Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
                                            Unit1aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0,
@@ -536,10 +536,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                    select new GarmentLeftoverWarehouseDetailReportViewModel
                                    {
                                        Description = "SALDO AWAL",
-                                       Unit2aQty = b.UnitCode == "C2A" ? b.Quantity : 0,
-                                       Unit2aPrice = b.UnitCode == "C2A" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit2bQty = b.UnitCode == "C2B" ? b.Quantity : 0,
-                                       Unit2bPrice = b.UnitCode == "C2B" ? b.Quantity * b.BasicPrice : 0,
+                                       Unit2aQty = b.UnitCode == "AG1" ? b.Quantity : 0,
+                                       Unit2aPrice = b.UnitCode == "AG1" ? b.Quantity * b.BasicPrice : 0,
+                                       Unit2bQty = b.UnitCode == "AG2" ? b.Quantity : 0,
+                                       Unit2bPrice = b.UnitCode == "AG2" ? b.Quantity * b.BasicPrice : 0,
                                        Unit2cQty = b.UnitCode == "C2C" ? b.Quantity : 0,
                                        Unit2cPrice = b.UnitCode == "C2C" ? b.Quantity * b.BasicPrice : 0,
                                        Unit1aQty = b.UnitCode == "C1A" ? b.Quantity : 0,
@@ -556,10 +556,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                           select new GarmentLeftoverWarehouseDetailReportViewModel
                                           {
                                               Description = "SALDO AWAL",
-                                              Unit2aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2A" ? b.Quantity : 0,
-                                              Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2A" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit2bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2B" ? b.Quantity : 0,
-                                              Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2B" ? b.Quantity : 0) * b.BasicPrice,
+                                              Unit2aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0,
+                                              Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
+                                              Unit2bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0,
+                                              Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
                                               Unit2cQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
                                               Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
                                               Unit1aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
@@ -578,10 +578,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                               select new GarmentLeftoverWarehouseDetailReportViewModel
                                               {
                                                   Description = "SALDO AWAL",
-                                                  Unit2aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2A" ? -b.ExpenditureQuantity : 0,
-                                                  Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2A" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
-                                                  Unit2bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2B" ? -b.ExpenditureQuantity : 0,
-                                                  Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2B" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                                  Unit2aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG1" ? -b.ExpenditureQuantity : 0,
+                                                  Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG1" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                                  Unit2bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.ExpenditureQuantity : 0,
+                                                  Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
                                                   Unit2cQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.ExpenditureQuantity : 0,
                                                   Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
                                                   Unit1aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.ExpenditureQuantity : 0,
@@ -599,10 +599,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                    select new GarmentLeftoverWarehouseDetailReportViewModel
                                    {
                                        Description = "TOTAL PENERIMAAN",
-                                       Unit2aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2A" ? b.Quantity : 0,
-                                       Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2A" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit2bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2B" ? b.Quantity : 0,
-                                       Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2B" ? b.Quantity : 0) * b.BasicPrice,
+                                       Unit2aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0,
+                                       Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
+                                       Unit2bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0,
+                                       Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
                                        Unit2cQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
                                        Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
                                        Unit1aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
@@ -622,10 +622,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        select new GarmentLeftoverWarehouseDetailReportViewModel
                                        {
                                            Description = "U/" + a.ExpenditureTo,
-                                           Unit2aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2A" ? b.ExpenditureQuantity : 0,
-                                           Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2A" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
-                                           Unit2bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2B" ? b.ExpenditureQuantity : 0,
-                                           Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2B" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                           Unit2aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG1" ? b.ExpenditureQuantity : 0,
+                                           Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG1" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                           Unit2bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.ExpenditureQuantity : 0,
+                                           Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
                                            Unit2cQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.ExpenditureQuantity : 0,
                                            Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
                                            Unit1aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.ExpenditureQuantity : 0,
@@ -915,10 +915,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                    select new GarmentLeftoverWarehouseDetailReportViewModel
                                    {
                                        Description = "SALDO AWAL",
-                                       Unit2aQty = b.UnitCode == "C2A" ? b.Quantity : 0,
-                                       Unit2aPrice = b.UnitCode == "C2A" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit2bQty = b.UnitCode == "C2B" ? b.Quantity : 0,
-                                       Unit2bPrice = b.UnitCode == "C2B" ? b.Quantity * b.BasicPrice : 0,
+                                       Unit2aQty = b.UnitCode == "AG1" ? b.Quantity : 0,
+                                       Unit2aPrice = b.UnitCode == "AG1" ? b.Quantity * b.BasicPrice : 0,
+                                       Unit2bQty = b.UnitCode == "AG2" ? b.Quantity : 0,
+                                       Unit2bPrice = b.UnitCode == "AG2" ? b.Quantity * b.BasicPrice : 0,
                                        Unit2cQty = b.UnitCode == "C2C" ? b.Quantity : 0,
                                        Unit2cPrice = b.UnitCode == "C2C" ? b.Quantity * b.BasicPrice : 0,
                                        Unit1aQty = b.UnitCode == "C1A" ? b.Quantity : 0,
@@ -935,10 +935,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                           select new GarmentLeftoverWarehouseDetailReportViewModel
                                           {
                                               Description = "SALDO AWAL",
-                                              Unit2aQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2A" ? b.Quantity : 0,
-                                              Unit2aPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2A" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit2bQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2B" ? b.Quantity : 0,
-                                              Unit2bPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2B" ? b.Quantity : 0) * b.BasicPrice,
+                                              Unit2aQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "AG1" ? b.Quantity : 0,
+                                              Unit2aPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
+                                              Unit2bQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "AG2" ? b.Quantity : 0,
+                                              Unit2bPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
                                               Unit2cQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0,
                                               Unit2cPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
                                               Unit1aQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0,
@@ -959,10 +959,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                               select new GarmentLeftoverWarehouseDetailReportViewModel
                                               {
                                                   Description = "SALDO AWAL",
-                                                  Unit2aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2A" ? -b.Quantity : 0,
-                                                  Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2A" ? -b.Quantity : 0) * b.BasicPrice,
-                                                  Unit2bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2B" ? -b.Quantity : 0,
-                                                  Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2B" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  Unit2aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG1" ? -b.Quantity : 0,
+                                                  Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG1" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  Unit2bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.Quantity : 0,
+                                                  Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.Quantity : 0) * b.BasicPrice,
                                                   Unit2cQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0,
                                                   Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0) * b.BasicPrice,
                                                   Unit1aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0,
@@ -981,10 +981,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                    select new GarmentLeftoverWarehouseDetailReportViewModel
                                    {
                                        Description = "TOTAL PENERIMAAN",
-                                       Unit2aQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2A" ? b.Quantity : 0,
-                                       Unit2aPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2A" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit2bQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2B" ? b.Quantity : 0,
-                                       Unit2bPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2B" ? b.Quantity : 0) * b.BasicPrice,
+                                       Unit2aQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "AG1" ? b.Quantity : 0,
+                                       Unit2aPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
+                                       Unit2bQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "AG2" ? b.Quantity : 0,
+                                       Unit2bPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
                                        Unit2cQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0,
                                        Unit2cPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
                                        Unit1aQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0,
@@ -1005,10 +1005,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        select new GarmentLeftoverWarehouseDetailReportViewModel
                                        {
                                            Description = "/U" + a.ExpenditureDestination,
-                                           Unit2aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2A" ? b.Quantity : 0,
-                                           Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2A" ? b.Quantity : 0) * b.BasicPrice,
-                                           Unit2bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2B" ? b.Quantity : 0,
-                                           Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2B" ? b.Quantity : 0) * b.BasicPrice,
+                                           Unit2aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG1" ? b.Quantity : 0,
+                                           Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
+                                           Unit2bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.Quantity : 0,
+                                           Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
                                            Unit2cQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0,
                                            Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
                                            Unit1aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0,
