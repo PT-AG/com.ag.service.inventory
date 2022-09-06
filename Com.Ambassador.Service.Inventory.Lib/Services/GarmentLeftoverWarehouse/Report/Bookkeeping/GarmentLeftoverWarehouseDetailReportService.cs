@@ -39,25 +39,24 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
 
             result.Columns.Add(new DataColumn() { ColumnName = "KETERANGAN", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "SAT", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 1A", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 1A2", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 1B", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 1B2", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 2A", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 2A1", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 2B", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 2B1", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 2C", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 2C1", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 1A", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 1A2", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 1B", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 1B2", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "AG1", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "AG11", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "AG2", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "AG21", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 2C", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "KONFEKSI 2C1", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "JUMLAH", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "JUMLAH1", DataType = typeof(String) });
             var stream = new MemoryStream();
 
             int counter = 0;
-            result.Rows.Add("",
-                    "", "QTY", "RP", "QTY", "RP", "QTY", "RP", "QTY", "RP", "QTY", "RP", "QTY", "RP");
+            result.Rows.Add("", "", "QTY", "RP", "QTY", "RP", "QTY", "RP");//, "RP", "QTY", "RP", "QTY", "RP");
             if (Query.ToArray().Count() == 0)
-                result.Rows.Add("","", 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0); // to allow column name to be generated properly for empty data as template
+                result.Rows.Add("","", 0, 0, 0, 0, 0, 0); // to allow column name to be generated properly for empty data as template
             else
             {
 
@@ -66,7 +65,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     counter++;
                     //DateTimeOffset date = item.date ?? new DateTime(1970, 1, 1);
                     //string dateString = date == new DateTime(1970, 1, 1) ? "-" : date.ToOffset(new TimeSpan(offset, 0, 0)).ToString("dd MMM yyyy", new CultureInfo("id-ID"));
-                    result.Rows.Add(item.Description, item.Uom, item.Unit1aQty, item.Unit1aPrice, item.Unit1bQty, item.Unit1bPrice, item.Unit2aQty,item.Unit2aPrice,item.Unit2bQty, item.Unit2bPrice, item.Unit2cQty,item.Unit2cPrice,item.TotalQty,item.TotalPrice);
+                    result.Rows.Add(item.Description, item.Uom, item.Unit2aQty, item.Unit2aPrice, item.Unit2bQty, item.Unit2bPrice, item.TotalQty, item.TotalPrice);// item.Unit1aQty, item.Unit1aPrice, item.Unit1bQty, item.Unit1bPrice,  item.Unit2cQty,item.Unit2cPrice,);
                 }
                 using (var package = new ExcelPackage())
                 {
@@ -75,16 +74,16 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     worksheet.Cells["C" + 1 + ":D" + 1 + ""].Merge = true;
                     worksheet.Cells["E" + 1 + ":F" + 1 + ""].Merge = true;
                     worksheet.Cells["G" + 1 + ":H" + 1 + ""].Merge = true;
-                    worksheet.Cells["I" + 1 + ":J" + 1 + ""].Merge = true;
-                    worksheet.Cells["K" + 1 + ":L" + 1 + ""].Merge = true;
-                    worksheet.Cells["M" + 1 + ":N" + 1 + ""].Merge = true;
+                    //worksheet.Cells["I" + 1 + ":J" + 1 + ""].Merge = true;
+                    //worksheet.Cells["K" + 1 + ":L" + 1 + ""].Merge = true;
+                    //worksheet.Cells["M" + 1 + ":N" + 1 + ""].Merge = true;
 
-                    worksheet.Cells["A" + 1 + ":N" + 2 + ""].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    worksheet.Cells["A" + 1 + ":N" + 3 + ""].Style.Font.Bold = true;
-                    worksheet.Cells["A" + 1 + ":N" + (counter + 2) + ""].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells["A" + 1 + ":N" + (counter + 2) + ""].Style.Border.Top.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells["A" + 1 + ":N" + (counter + 2) + ""].Style.Border.Left.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells["A" + 1 + ":N" + (counter + 2) + ""].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + 1 + ":H" + 2 + ""].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    worksheet.Cells["A" + 1 + ":H" + 3 + ""].Style.Font.Bold = true;
+                    worksheet.Cells["A" + 1 + ":H" + (counter + 2) + ""].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + 1 + ":H" + (counter + 2) + ""].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + 1 + ":H" + (counter + 2) + ""].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + 1 + ":H" + (counter + 2) + ""].Style.Border.Right.Style = ExcelBorderStyle.Thin;
 
                     for (int i = 1; i < counter + 3; i++)
                     {
@@ -95,24 +94,24 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                             if (_val.Contains("TOTAL") || _val.Contains("SALDO AKHIR"))
                             {
 
-                                worksheet.Cells["A" + i + ":N" + i + ""].Style.Font.Bold = true;
+                                worksheet.Cells["A" + i + ":H" + i + ""].Style.Font.Bold = true;
 
                             }
                             if (_val == "PENERIMAAN" || _val =="PENGELUARAN")
                             {
-                                worksheet.Cells["A" + i + ":N" + i + ""].Merge = true;
-                                worksheet.Cells["A" + i + ":N" + i + ""].Style.Font.Bold = true;
+                                worksheet.Cells["A" + i + ":H" + i + ""].Merge = true;
+                                worksheet.Cells["A" + i + ":H" + i + ""].Style.Font.Bold = true;
                             }
                         }
                     }
                     
-                    foreach (var cell in worksheet.Cells["C" + 3 + ":N" + (counter + 2) + ""])
+                    foreach (var cell in worksheet.Cells["C" + 3 + ":H" + (counter + 2) + ""])
                     {
                         cell.Value = Convert.ToDecimal(cell.Value);
                         cell.Style.Numberformat.Format = "#,##0.00";
                         cell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
                     }
-                    worksheet.Cells["A" + 1 + ":N" + (counter + 2) + ""].AutoFitColumns();
+                    worksheet.Cells["A" + 1 + ":H" + (counter + 2) + ""].AutoFitColumns();
 
                     package.SaveAs(stream);
 
@@ -158,12 +157,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        Unit2aPrice = b.UnitCode == "AG1" ? b.Quantity * b.BasicPrice : 0,
                                        Unit2bQty = b.UnitCode == "AG2" ? b.Quantity : 0,
                                        Unit2bPrice = b.UnitCode == "AG2" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit2cQty = b.UnitCode == "C2C" ? b.Quantity : 0,
-                                       Unit2cPrice = b.UnitCode == "C2C" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit1aQty = b.UnitCode == "C1A" ? b.Quantity : 0,
-                                       Unit1aPrice = b.UnitCode == "C1A" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit1bQty = b.UnitCode == "C1B" ? b.Quantity : 0,
-                                       Unit1bPrice = b.UnitCode == "C1B" ? b.Quantity * b.BasicPrice : 0,
+                                       //Unit2cQty = b.UnitCode == "C2C" ? b.Quantity : 0,
+                                       //Unit2cPrice = b.UnitCode == "C2C" ? b.Quantity * b.BasicPrice : 0,
+                                       //Unit1aQty = b.UnitCode == "C1A" ? b.Quantity : 0,
+                                       //Unit1aPrice = b.UnitCode == "C1A" ? b.Quantity * b.BasicPrice : 0,
+                                       //Unit1bQty = b.UnitCode == "C1B" ? b.Quantity : 0,
+                                       //Unit1bPrice = b.UnitCode == "C1B" ? b.Quantity * b.BasicPrice : 0,
                                    };
                 var QueryReceiptBalance = from a in (from data in DbContext.GarmentLeftoverWarehouseReceiptFabrics
                                                      where data._IsDeleted == false
@@ -178,12 +177,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                               Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
                                               Unit2bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0,
                                               Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit2cQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
-                                              Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit1aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
-                                              Unit1aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit1bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0,
-                                              Unit1bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
+                                              //Unit2cQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
+                                              //Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
+                                              //Unit1aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
+                                              //Unit1aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
+                                              //Unit1bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0,
+                                              //Unit1bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
 
                                           };
                 var QueryExpenditureBalance = from a in (from data in DbContext.GarmentLeftoverWarehouseExpenditureFabrics
@@ -200,12 +199,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                                   Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG1" ? -b.Quantity : 0) * b.BasicPrice,
                                                   Unit2bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.Quantity : 0,
                                                   Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.Quantity : 0) * b.BasicPrice,
-                                                  Unit2cQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0,
-                                                  Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0) * b.BasicPrice,
-                                                  Unit1aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0,
-                                                  Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0) * b.BasicPrice,
-                                                  Unit1bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.Quantity : 0,
-                                                  Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  //Unit2cQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0,
+                                                  //Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  //Unit1aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0,
+                                                  //Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  //Unit1bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.Quantity : 0,
+                                                  //Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.Quantity : 0) * b.BasicPrice,
 
                                               };
                 var QueryReceipt = from a in (from data in DbContext.GarmentLeftoverWarehouseReceiptFabrics
@@ -221,12 +220,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
                                        Unit2bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0,
                                        Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit2cQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
-                                       Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit1aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
-                                       Unit1aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit1bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0,
-                                       Unit1bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
+                                       //Unit2cQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
+                                       //Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
+                                       //Unit1aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
+                                       //Unit1aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
+                                       //Unit1bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0,
+                                       //Unit1bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
 
                                    };
 
@@ -244,12 +243,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                            Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
                                            Unit2bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.Quantity : 0,
                                            Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
-                                           Unit2cQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0,
-                                           Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
-                                           Unit1aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0,
-                                           Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
-                                           Unit1bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.Quantity : 0,
-                                           Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
+                                           //Unit2cQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0,
+                                           //Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
+                                           //Unit1aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0,
+                                           //Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
+                                           //Unit1bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.Quantity : 0,
+                                           //Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
 
                                        };
                 var Query = QueryBalance.Union(QueryReceiptBalance).Union(QueryExpenditureBalance);
@@ -277,12 +276,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 var querySumExpenditure = QueryExpenditure.ToList()
@@ -293,12 +292,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 var queryExpenditureTOTAL = QueryExpenditure.ToList()
@@ -309,12 +308,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 foreach (var data in querySumBalance)
@@ -326,15 +325,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "MT",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty ,//+ data.unit1aqty + data.unit1bqty +  data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice)// + (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -346,12 +345,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     Unit2aPrice = 0,
                     Unit2bQty = 0,
                     Unit2bPrice = 0,
-                    Unit2cQty = 0,
-                    Unit2cPrice = 0,
-                    Unit1aQty = 0,
-                    Unit1aPrice = 0,
-                    Unit1bQty = 0,
-                    Unit1bPrice = 0,
+                    //Unit2cQty = 0,
+                    //Unit2cPrice = 0,
+                    //Unit1aQty = 0,
+                    //Unit1aPrice = 0,
+                    //Unit1bQty = 0,
+                    //Unit1bPrice = 0,
                     Uom = "MT"
                 };
                 reportViewModels.Add(receiptheader);
@@ -364,15 +363,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "MT",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty ,//+ data.unit1aqty + data.unit1bqty +  data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) ,//+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -384,12 +383,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     Unit2aPrice = 0,
                     Unit2bQty = 0,
                     Unit2bPrice = 0,
-                    Unit2cQty = 0,
-                    Unit2cPrice = 0,
-                    Unit1aQty = 0,
-                    Unit1aPrice = 0,
-                    Unit1bQty = 0,
-                    Unit1bPrice = 0,
+                    //Unit2cQty = 0,
+                    //Unit2cPrice = 0,
+                    //Unit1aQty = 0,
+                    //Unit1aPrice = 0,
+                    //Unit1bQty = 0,
+                    //Unit1bPrice = 0,
                     Uom = "MT"
                 };
                 reportViewModels.Add(expendHeader);
@@ -402,15 +401,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "MT",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -424,15 +423,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "MT",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -448,12 +447,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                             Unit2aPrice = data.Unit2aPrice,
                             Unit2bQty = data.Unit2bQty,
                             Unit2bPrice = data.Unit2bPrice,
-                            Unit2cQty = data.Unit2cQty,
-                            Unit2cPrice = data.Unit2cPrice,
-                            Unit1aQty = data.Unit1aQty,
-                            Unit1aPrice = data.Unit1aPrice,
-                            Unit1bQty = data.Unit1bQty,
-                            Unit1bPrice = data.Unit1bPrice,
+                            //Unit2cQty = data.Unit2cQty,
+                            //Unit2cPrice = data.Unit2cPrice,
+                            //Unit1aQty = data.Unit1aQty,
+                            //Unit1aPrice = data.Unit1aPrice,
+                            //Unit1bQty = data.Unit1bQty,
+                            //Unit1bPrice = data.Unit1bPrice,
                             Uom = "MT",
                             TotalQty = data.TotalQty,
                             TotalPrice = data.TotalPrice
@@ -470,12 +469,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                             Unit2aPrice = -data.Unit2aPrice,
                             Unit2bQty = -data.Unit2bQty,
                             Unit2bPrice = -data.Unit2bPrice,
-                            Unit2cQty = -data.Unit2cQty,
-                            Unit2cPrice = -data.Unit2cPrice,
-                            Unit1aQty = -data.Unit1aQty,
-                            Unit1aPrice = -data.Unit1aPrice,
-                            Unit1bQty = -data.Unit1bQty,
-                            Unit1bPrice = -data.Unit1bPrice,
+                            //Unit2cQty = -data.Unit2cQty,
+                            //Unit2cPrice = -data.Unit2cPrice,
+                            //Unit1aQty = -data.Unit1aQty,
+                            //Unit1aPrice = -data.Unit1aPrice,
+                            //Unit1bQty = -data.Unit1bQty,
+                            //Unit1bPrice = -data.Unit1bPrice,
                             Uom = "MT",
                             TotalQty = -data.TotalQty,
                             TotalPrice = -data.TotalPrice
@@ -491,12 +490,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        unit2aprice = group.Sum(s => s.Unit2aPrice),
                                        unit2bqty = group.Sum(s => s.Unit2bQty),
                                        unit2bprice = group.Sum(s => s.Unit2bPrice),
-                                       unit2cqty = group.Sum(s => s.Unit2cQty),
-                                       unit2cprice = group.Sum(s => s.Unit2cPrice),
-                                       unit1aqty = group.Sum(s => s.Unit1aQty),
-                                       unit1aprice = group.Sum(s => s.Unit1aPrice),
-                                       unit1bqty = group.Sum(s => s.Unit1bQty),
-                                       unit1bprice = group.Sum(s => s.Unit1bPrice)
+                                       //unit2cqty = group.Sum(s => s.Unit2cQty),
+                                       //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                                       //unit1aqty = group.Sum(s => s.Unit1aQty),
+                                       //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                                       //unit1bqty = group.Sum(s => s.Unit1bQty),
+                                       //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                                    }).OrderByDescending(s => s.description);
                 foreach (var data in queryENDBALANCE)
@@ -508,15 +507,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "MT",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -540,12 +539,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        Unit2aPrice = b.UnitCode == "AG1" ? b.Quantity * b.BasicPrice : 0,
                                        Unit2bQty = b.UnitCode == "AG2" ? b.Quantity : 0,
                                        Unit2bPrice = b.UnitCode == "AG2" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit2cQty = b.UnitCode == "C2C" ? b.Quantity : 0,
-                                       Unit2cPrice = b.UnitCode == "C2C" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit1aQty = b.UnitCode == "C1A" ? b.Quantity : 0,
-                                       Unit1aPrice = b.UnitCode == "C1A" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit1bQty = b.UnitCode == "C1B" ? b.Quantity : 0,
-                                       Unit1bPrice = b.UnitCode == "C1B" ? b.Quantity * b.BasicPrice : 0,
+                                       //Unit2cQty = b.UnitCode == "C2C" ? b.Quantity : 0,
+                                       //Unit2cPrice = b.UnitCode == "C2C" ? b.Quantity * b.BasicPrice : 0,
+                                       //Unit1aQty = b.UnitCode == "C1A" ? b.Quantity : 0,
+                                       //Unit1aPrice = b.UnitCode == "C1A" ? b.Quantity * b.BasicPrice : 0,
+                                       //Unit1bQty = b.UnitCode == "C1B" ? b.Quantity : 0,
+                                       //Unit1bPrice = b.UnitCode == "C1B" ? b.Quantity * b.BasicPrice : 0,
                                    };
                 var QueryReceiptBalance = from a in (from data in DbContext.GarmentLeftoverWarehouseReceiptFinishedGoods
                                                      where data._IsDeleted == false
@@ -560,12 +559,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                               Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
                                               Unit2bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0,
                                               Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit2cQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
-                                              Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit1aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
-                                              Unit1aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit1bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0,
-                                              Unit1bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
+                                              //Unit2cQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
+                                              //Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
+                                              //Unit1aQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
+                                              //Unit1aPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
+                                              //Unit1bQty = a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0,
+                                              //Unit1bPrice = (a.ReceiptDate.AddHours(offset).Date < DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
 
                                           };
                 var QueryExpenditureBalance = from a in (from data in DbContext.GarmentLeftoverWarehouseExpenditureFinishedGoods
@@ -582,12 +581,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                                   Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG1" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
                                                   Unit2bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.ExpenditureQuantity : 0,
                                                   Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
-                                                  Unit2cQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.ExpenditureQuantity : 0,
-                                                  Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
-                                                  Unit1aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.ExpenditureQuantity : 0,
-                                                  Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
-                                                  Unit1bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.ExpenditureQuantity : 0,
-                                                  Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                                  //Unit2cQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.ExpenditureQuantity : 0,
+                                                  //Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                                  //Unit1aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.ExpenditureQuantity : 0,
+                                                  //Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                                  //Unit1bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.ExpenditureQuantity : 0,
+                                                  //Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.ExpenditureQuantity : 0) * b.BasicPrice,
 
                                               };
                 var QueryReceipt = from a in (from data in DbContext.GarmentLeftoverWarehouseReceiptFinishedGoods
@@ -603,12 +602,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        Unit2aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
                                        Unit2bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0,
                                        Unit2bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit2cQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
-                                       Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit1aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
-                                       Unit1aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit1bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0,
-                                       Unit1bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
+                                       //Unit2cQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0,
+                                       //Unit2cPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
+                                       //Unit1aQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0,
+                                       //Unit1aPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
+                                       //Unit1bQty = a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0,
+                                       //Unit1bPrice = (a.ReceiptDate.AddHours(offset).Date >= DateFrom.Date && a.UnitFromCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
 
                                    };
 
@@ -626,12 +625,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                            Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG1" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
                                            Unit2bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.ExpenditureQuantity : 0,
                                            Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
-                                           Unit2cQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.ExpenditureQuantity : 0,
-                                           Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
-                                           Unit1aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.ExpenditureQuantity : 0,
-                                           Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
-                                           Unit1bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.ExpenditureQuantity : 0,
-                                           Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                           //Unit2cQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.ExpenditureQuantity : 0,
+                                           //Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                           //Unit1aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.ExpenditureQuantity : 0,
+                                           //Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
+                                           //Unit1bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.ExpenditureQuantity : 0,
+                                           //Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.ExpenditureQuantity : 0) * b.BasicPrice,
 
                                        };
                 var Query = QueryBalance.Union(QueryReceiptBalance).Union(QueryExpenditureBalance);
@@ -643,12 +642,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 var querySumReceipt = QueryReceipt.ToList()
@@ -659,12 +658,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 var querySumExpenditure = QueryExpenditure.ToList()
@@ -675,12 +674,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 var queryExpenditureTOTAL = QueryExpenditure.ToList()
@@ -691,12 +690,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 foreach (var data in querySumBalance)
@@ -708,15 +707,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "PCS",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -728,12 +727,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     Unit2aPrice = 0,
                     Unit2bQty = 0,
                     Unit2bPrice = 0,
-                    Unit2cQty = 0,
-                    Unit2cPrice = 0,
-                    Unit1aQty = 0,
-                    Unit1aPrice = 0,
-                    Unit1bQty = 0,
-                    Unit1bPrice = 0,
+                    //Unit2cQty = 0,
+                    //Unit2cPrice = 0,
+                    //Unit1aQty = 0,
+                    //Unit1aPrice = 0,
+                    //Unit1bQty = 0,
+                    //Unit1bPrice = 0,
                     Uom = "PCS"
                 };
                 reportViewModels.Add(receiptheader);
@@ -746,15 +745,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "PCS",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -766,12 +765,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     Unit2aPrice = 0,
                     Unit2bQty = 0,
                     Unit2bPrice = 0,
-                    Unit2cQty = 0,
-                    Unit2cPrice = 0,
-                    Unit1aQty = 0,
-                    Unit1aPrice = 0,
-                    Unit1bQty = 0,
-                    Unit1bPrice = 0,
+                    //Unit2cQty = 0,
+                    //Unit2cPrice = 0,
+                    //Unit1aQty = 0,
+                    //Unit1aPrice = 0,
+                    //Unit1bQty = 0,
+                    //Unit1bPrice = 0,
                     Uom = "PCS"
                 };
                 reportViewModels.Add(expendHeader);
@@ -784,15 +783,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "PCS",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -806,15 +805,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "PCS",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -830,12 +829,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                             Unit2aPrice = data.Unit2aPrice,
                             Unit2bQty = data.Unit2bQty,
                             Unit2bPrice = data.Unit2bPrice,
-                            Unit2cQty = data.Unit2cQty,
-                            Unit2cPrice = data.Unit2cPrice,
-                            Unit1aQty = data.Unit1aQty,
-                            Unit1aPrice = data.Unit1aPrice,
-                            Unit1bQty = data.Unit1bQty,
-                            Unit1bPrice = data.Unit1bPrice,
+                            //Unit2cQty = data.Unit2cQty,
+                            //Unit2cPrice = data.Unit2cPrice,
+                            //Unit1aQty = data.Unit1aQty,
+                            //Unit1aPrice = data.Unit1aPrice,
+                            //Unit1bQty = data.Unit1bQty,
+                            //Unit1bPrice = data.Unit1bPrice,
                             Uom = "PCS",
                             TotalQty = data.TotalQty,
                             TotalPrice = data.TotalPrice
@@ -852,12 +851,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                             Unit2aPrice = -data.Unit2aPrice,
                             Unit2bQty = -data.Unit2bQty,
                             Unit2bPrice = -data.Unit2bPrice,
-                            Unit2cQty = -data.Unit2cQty,
-                            Unit2cPrice = -data.Unit2cPrice,
-                            Unit1aQty = -data.Unit1aQty,
-                            Unit1aPrice = -data.Unit1aPrice,
-                            Unit1bQty = -data.Unit1bQty,
-                            Unit1bPrice = -data.Unit1bPrice,
+                            //Unit2cQty = -data.Unit2cQty,
+                            //Unit2cPrice = -data.Unit2cPrice,
+                            //Unit1aQty = -data.Unit1aQty,
+                            //Unit1aPrice = -data.Unit1aPrice,
+                            //Unit1bQty = -data.Unit1bQty,
+                            //Unit1bPrice = -data.Unit1bPrice,
                             Uom = "PCS",
                             TotalQty = -data.TotalQty,
                             TotalPrice = -data.TotalPrice
@@ -873,12 +872,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        unit2aprice = group.Sum(s => s.Unit2aPrice),
                                        unit2bqty = group.Sum(s => s.Unit2bQty),
                                        unit2bprice = group.Sum(s => s.Unit2bPrice),
-                                       unit2cqty = group.Sum(s => s.Unit2cQty),
-                                       unit2cprice = group.Sum(s => s.Unit2cPrice),
-                                       unit1aqty = group.Sum(s => s.Unit1aQty),
-                                       unit1aprice = group.Sum(s => s.Unit1aPrice),
-                                       unit1bqty = group.Sum(s => s.Unit1bQty),
-                                       unit1bprice = group.Sum(s => s.Unit1bPrice)
+                                       //unit2cqty = group.Sum(s => s.Unit2cQty),
+                                       //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                                       //unit1aqty = group.Sum(s => s.Unit1aQty),
+                                       //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                                       //unit1bqty = group.Sum(s => s.Unit1bQty),
+                                       //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                                    }).OrderByDescending(s => s.description);
                 foreach (var data in queryENDBALANCE)
@@ -890,15 +889,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "PCS",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -919,12 +918,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        Unit2aPrice = b.UnitCode == "AG1" ? b.Quantity * b.BasicPrice : 0,
                                        Unit2bQty = b.UnitCode == "AG2" ? b.Quantity : 0,
                                        Unit2bPrice = b.UnitCode == "AG2" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit2cQty = b.UnitCode == "C2C" ? b.Quantity : 0,
-                                       Unit2cPrice = b.UnitCode == "C2C" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit1aQty = b.UnitCode == "C1A" ? b.Quantity : 0,
-                                       Unit1aPrice = b.UnitCode == "C1A" ? b.Quantity * b.BasicPrice : 0,
-                                       Unit1bQty = b.UnitCode == "C1B" ? b.Quantity : 0,
-                                       Unit1bPrice = b.UnitCode == "C1B" ? b.Quantity * b.BasicPrice : 0,
+                                       //Unit2cQty = b.UnitCode == "C2C" ? b.Quantity : 0,
+                                       //Unit2cPrice = b.UnitCode == "C2C" ? b.Quantity * b.BasicPrice : 0,
+                                       //Unit1aQty = b.UnitCode == "C1A" ? b.Quantity : 0,
+                                       //Unit1aPrice = b.UnitCode == "C1A" ? b.Quantity * b.BasicPrice : 0,
+                                       //Unit1bQty = b.UnitCode == "C1B" ? b.Quantity : 0,
+                                       //Unit1bPrice = b.UnitCode == "C1B" ? b.Quantity * b.BasicPrice : 0,
                                    };
                 var QueryReceiptBalance = from a in (from data in DbContext.GarmentLeftoverWarehouseReceiptAccessories
                                                      where data._IsDeleted == false
@@ -939,12 +938,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                               Unit2aPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
                                               Unit2bQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "AG2" ? b.Quantity : 0,
                                               Unit2bPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit2cQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0,
-                                              Unit2cPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit1aQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0,
-                                              Unit1aPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
-                                              Unit1bQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C1B" ? b.Quantity : 0,
-                                              Unit1bPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
+                                              //Unit2cQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0,
+                                              //Unit2cPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
+                                              //Unit1aQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0,
+                                              //Unit1aPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
+                                              //Unit1bQty = a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C1B" ? b.Quantity : 0,
+                                              //Unit1bPrice = (a.StorageReceiveDate.AddHours(offset).Date < DateFrom.Date && a.RequestUnitCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
 
                                           };
                 var QueryExpenditureBalance = from a in (from data in DbContext.GarmentLeftoverWarehouseExpenditureAccessories
@@ -963,12 +962,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                                   Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG1" ? -b.Quantity : 0) * b.BasicPrice,
                                                   Unit2bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.Quantity : 0,
                                                   Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "AG2" ? -b.Quantity : 0) * b.BasicPrice,
-                                                  Unit2cQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0,
-                                                  Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0) * b.BasicPrice,
-                                                  Unit1aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0,
-                                                  Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0) * b.BasicPrice,
-                                                  Unit1bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.Quantity : 0,
-                                                  Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  //Unit2cQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0,
+                                                  //Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C2C" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  //Unit1aQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0,
+                                                  //Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1A" ? -b.Quantity : 0) * b.BasicPrice,
+                                                  //Unit1bQty = a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.Quantity : 0,
+                                                  //Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date < DateFrom.Date && b.UnitCode == "C1B" ? -b.Quantity : 0) * b.BasicPrice,
 
                                               };
 
@@ -985,12 +984,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        Unit2aPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
                                        Unit2bQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "AG2" ? b.Quantity : 0,
                                        Unit2bPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit2cQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0,
-                                       Unit2cPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit1aQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0,
-                                       Unit1aPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
-                                       Unit1bQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C1B" ? b.Quantity : 0,
-                                       Unit1bPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
+                                       //Unit2cQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0,
+                                       //Unit2cPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
+                                       //Unit1aQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0,
+                                       //Unit1aPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
+                                       //Unit1bQty = a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C1B" ? b.Quantity : 0,
+                                       //Unit1bPrice = (a.StorageReceiveDate.AddHours(offset).Date >= DateFrom.Date && a.RequestUnitCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
 
                                    };
                 var QueryExpenditure = from a in (from data in DbContext.GarmentLeftoverWarehouseExpenditureAccessories
@@ -1009,12 +1008,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                            Unit2aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG1" ? b.Quantity : 0) * b.BasicPrice,
                                            Unit2bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.Quantity : 0,
                                            Unit2bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "AG2" ? b.Quantity : 0) * b.BasicPrice,
-                                           Unit2cQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0,
-                                           Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
-                                           Unit1aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0,
-                                           Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
-                                           Unit1bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.Quantity : 0,
-                                           Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
+                                           //Unit2cQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0,
+                                           //Unit2cPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C2C" ? b.Quantity : 0) * b.BasicPrice,
+                                           //Unit1aQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0,
+                                           //Unit1aPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1A" ? b.Quantity : 0) * b.BasicPrice,
+                                           //Unit1bQty = a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.Quantity : 0,
+                                           //Unit1bPrice = (a.ExpenditureDate.AddHours(offset).Date >= DateFrom.Date && b.UnitCode == "C1B" ? b.Quantity : 0) * b.BasicPrice,
 
                                        };
                 var Query = QueryBalance.Union(QueryReceiptBalance).Union(QueryExpenditureBalance);
@@ -1026,12 +1025,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 var querySumReceipt = QueryReceipt.ToList()
@@ -1042,12 +1041,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 var querySumExpenditure = QueryExpenditure.ToList()
@@ -1058,12 +1057,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 var queryExpenditureTOTAL = QueryExpenditure.ToList()
@@ -1074,12 +1073,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         unit2aprice = group.Sum(s => s.Unit2aPrice),
                         unit2bqty = group.Sum(s => s.Unit2bQty),
                         unit2bprice = group.Sum(s => s.Unit2bPrice),
-                        unit2cqty = group.Sum(s => s.Unit2cQty),
-                        unit2cprice = group.Sum(s => s.Unit2cPrice),
-                        unit1aqty = group.Sum(s => s.Unit1aQty),
-                        unit1aprice = group.Sum(s => s.Unit1aPrice),
-                        unit1bqty = group.Sum(s => s.Unit1bQty),
-                        unit1bprice = group.Sum(s => s.Unit1bPrice)
+                        //unit2cqty = group.Sum(s => s.Unit2cQty),
+                        //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                        //unit1aqty = group.Sum(s => s.Unit1aQty),
+                        //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                        //unit1bqty = group.Sum(s => s.Unit1bQty),
+                        //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                     }).OrderByDescending(s => s.description);
                 foreach (var data in querySumBalance)
@@ -1091,15 +1090,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -1111,12 +1110,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     Unit2aPrice = 0,
                     Unit2bQty = 0,
                     Unit2bPrice = 0,
-                    Unit2cQty = 0,
-                    Unit2cPrice = 0,
-                    Unit1aQty = 0,
-                    Unit1aPrice = 0,
-                    Unit1bQty = 0,
-                    Unit1bPrice = 0,
+                    //Unit2cQty = 0,
+                    //Unit2cPrice = 0,
+                    //Unit1aQty = 0,
+                    //Unit1aPrice = 0,
+                    //Unit1bQty = 0,
+                    //Unit1bPrice = 0,
                     Uom = ""
                 };
                 reportViewModels.Add(receiptheader);
@@ -1129,15 +1128,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -1149,12 +1148,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     Unit2aPrice = 0,
                     Unit2bQty = 0,
                     Unit2bPrice = 0,
-                    Unit2cQty = 0,
-                    Unit2cPrice = 0,
-                    Unit1aQty = 0,
-                    Unit1aPrice = 0,
-                    Unit1bQty = 0,
-                    Unit1bPrice = 0,
+                    //Unit2cQty = 0,
+                    //Unit2cPrice = 0,
+                    //Unit1aQty = 0,
+                    //Unit1aPrice = 0,
+                    //Unit1bQty = 0,
+                    //Unit1bPrice = 0,
                     Uom = ""
                 };
                 reportViewModels.Add(expendHeader);
@@ -1167,15 +1166,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -1189,15 +1188,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
@@ -1213,12 +1212,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                             Unit2aPrice = data.Unit2aPrice,
                             Unit2bQty = data.Unit2bQty,
                             Unit2bPrice = data.Unit2bPrice,
-                            Unit2cQty = data.Unit2cQty,
-                            Unit2cPrice = data.Unit2cPrice,
-                            Unit1aQty = data.Unit1aQty,
-                            Unit1aPrice = data.Unit1aPrice,
-                            Unit1bQty = data.Unit1bQty,
-                            Unit1bPrice = data.Unit1bPrice,
+                            //Unit2cQty = data.Unit2cQty,
+                            //Unit2cPrice = data.Unit2cPrice,
+                            //Unit1aQty = data.Unit1aQty,
+                            //Unit1aPrice = data.Unit1aPrice,
+                            //Unit1bQty = data.Unit1bQty,
+                            //Unit1bPrice = data.Unit1bPrice,
                             Uom = "",
                             TotalQty = data.TotalQty,
                             TotalPrice = data.TotalPrice
@@ -1235,12 +1234,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                             Unit2aPrice = -data.Unit2aPrice,
                             Unit2bQty = -data.Unit2bQty,
                             Unit2bPrice = -data.Unit2bPrice,
-                            Unit2cQty = -data.Unit2cQty,
-                            Unit2cPrice = -data.Unit2cPrice,
-                            Unit1aQty = -data.Unit1aQty,
-                            Unit1aPrice = -data.Unit1aPrice,
-                            Unit1bQty = -data.Unit1bQty,
-                            Unit1bPrice = -data.Unit1bPrice,
+                            //Unit2cQty = -data.Unit2cQty,
+                            //Unit2cPrice = -data.Unit2cPrice,
+                            //Unit1aQty = -data.Unit1aQty,
+                            //Unit1aPrice = -data.Unit1aPrice,
+                            //Unit1bQty = -data.Unit1bQty,
+                            //Unit1bPrice = -data.Unit1bPrice,
                             Uom = "",
                             TotalQty = -data.TotalQty,
                             TotalPrice = -data.TotalPrice
@@ -1256,12 +1255,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                        unit2aprice = group.Sum(s => s.Unit2aPrice),
                                        unit2bqty = group.Sum(s => s.Unit2bQty),
                                        unit2bprice = group.Sum(s => s.Unit2bPrice),
-                                       unit2cqty = group.Sum(s => s.Unit2cQty),
-                                       unit2cprice = group.Sum(s => s.Unit2cPrice),
-                                       unit1aqty = group.Sum(s => s.Unit1aQty),
-                                       unit1aprice = group.Sum(s => s.Unit1aPrice),
-                                       unit1bqty = group.Sum(s => s.Unit1bQty),
-                                       unit1bprice = group.Sum(s => s.Unit1bPrice)
+                                       //unit2cqty = group.Sum(s => s.Unit2cQty),
+                                       //unit2cprice = group.Sum(s => s.Unit2cPrice),
+                                       //unit1aqty = group.Sum(s => s.Unit1aQty),
+                                       //unit1aprice = group.Sum(s => s.Unit1aPrice),
+                                       //unit1bqty = group.Sum(s => s.Unit1bQty),
+                                       //unit1bprice = group.Sum(s => s.Unit1bPrice)
 
                                    }).OrderByDescending(s => s.description);
                 foreach (var data in queryENDBALANCE)
@@ -1273,15 +1272,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         Unit2aPrice = data.unit2aprice,
                         Unit2bQty = data.unit2bqty,
                         Unit2bPrice = data.unit2bprice,
-                        Unit2cQty = data.unit2cqty,
-                        Unit2cPrice = data.unit2cprice,
-                        Unit1aQty = data.unit1aqty,
-                        Unit1aPrice = data.unit1aprice,
-                        Unit1bQty = data.unit1bqty,
-                        Unit1bPrice = data.unit1bprice,
+                        //Unit2cQty = data.unit2cqty,
+                        //Unit2cPrice = data.unit2cprice,
+                        //Unit1aQty = data.unit1aqty,
+                        //Unit1aPrice = data.unit1aprice,
+                        //Unit1bQty = data.unit1bqty,
+                        //Unit1bPrice = data.unit1bprice,
                         Uom = "",
-                        TotalQty = data.unit1aqty + data.unit1bqty + data.unit2aqty + data.unit2bqty + data.unit2cqty,
-                        TotalPrice = (data.unit1aprice) + (data.unit1bprice) + ( data.unit2aprice) + ( data.unit2bprice) + (data.unit2cprice)
+                        TotalQty = data.unit2aqty + data.unit2bqty,// + data.unit1aqty + data.unit1bqty + data.unit2cqty,
+                        TotalPrice = (data.unit2aprice) + (data.unit2bprice) //+ (data.unit1aprice) + (data.unit1bprice) +  (data.unit2cprice)
 
                     };
                     reportViewModels.Add(garmentLeftover);
