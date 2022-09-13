@@ -374,11 +374,11 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             result.Columns.Add(new DataColumn() { ColumnName = "Satuan", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "Harga", DataType = typeof(double) });
             result.Columns.Add(new DataColumn() { ColumnName = "No Nota Penjualan", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "No Bc Keluar", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "Tipe Bc", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "Tanggal Bc", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "No Bc Keluar", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "Tipe Bc", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "Tanggal Bc", DataType = typeof(String) });
             if (Query.ToArray().Count() == 0)
-                result.Rows.Add("", "", "", "", "", "",0, "", "", "", "", "", 0, "", 0, "", 0, "",""); // to allow column name to be generated properly for empty data as template
+                result.Rows.Add("", "", "", "", "", "",0, "", "", "", "", "", 0, "", 0, ""); // to allow column name to be generated properly for empty data as template
             else
             {
                 int index = 0;
@@ -407,10 +407,11 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         item.Quantity, 
                         item.Uom.Unit,
                         item.Price,
-                        item.LocalSalesNoteNo, 
-                        item.BCNo, 
-                        item.BCType, 
-                        item.BCDate?.ToString("dd MMM yyyy", new CultureInfo("id-ID")));
+                        item.LocalSalesNoteNo 
+                        //item.BCNo, 
+                        //item.BCType, 
+                        //item.BCDate?.ToString("dd MMM yyyy", new CultureInfo("id-ID"))
+						);
                 }
 
                 result.Rows.Add(
@@ -429,10 +430,11 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                          QtyTotal,
                          "",
                          PriceTotal,
-                         "",
-                         "",
-                         "",
-                         "");
+                         //"",
+                         //"",
+                         //"",
+                         ""
+						 );
             }
 
             return Excel.CreateExcel(new List<KeyValuePair<DataTable, string>>() { new KeyValuePair<DataTable, string>(result, "Report Pengeluaran Gudang Sisa") }, true);
