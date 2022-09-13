@@ -364,7 +364,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             result.Columns.Add(new DataColumn() { ColumnName = "Asal", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "Tujuan", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "Keterangan Tujuan", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "Jumlah Keluar (KG)", DataType = typeof(double) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "Jumlah Keluar (KG)", DataType = typeof(double) });
             result.Columns.Add(new DataColumn() { ColumnName = "Komposisi", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "Konstruksi", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "Nomor PO", DataType = typeof(String) });
@@ -378,7 +378,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             result.Columns.Add(new DataColumn() { ColumnName = "Tipe Bc", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "Tanggal Bc", DataType = typeof(String) });
             if (Query.ToArray().Count() == 0)
-                result.Rows.Add("", "", "", "", "", "",0, "", "", "", "", "", 0, "", 0, "", 0, "",""); // to allow column name to be generated properly for empty data as template
+                result.Rows.Add("", "", "", "", "", "", "", "", "", "", "", 0, "", 0, "", 0, "",""); // to allow column name to be generated properly for empty data as template
             else
             {
                 int index = 0;
@@ -398,7 +398,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         item.UnitFrom.Name,
                         item.ExpenditureDestination, 
                         item.DescriptionOfPurpose, 
-                        item.QtyKG,
+                        //item.QtyKG,
                         item.Composition,
                         item.Const,
                         item.PONo, 
@@ -420,7 +420,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                          "",
                          "",
                          "",
-                         ExpendQtyTotal,
+                         //ExpendQtyTotal,
                          "",
                          "",
                          "",
