@@ -670,12 +670,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             result.Columns.Add(new DataColumn() { ColumnName = "Satuan", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "Price", DataType = typeof(double) });
             result.Columns.Add(new DataColumn() { ColumnName = "PO", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "No BC masuk", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "Tgl Bc masuk", DataType = typeof(String) });
-            result.Columns.Add(new DataColumn() { ColumnName = "Tipe BC", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "No BC masuk", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "Tgl Bc masuk", DataType = typeof(String) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "Tipe BC", DataType = typeof(String) });
 
             if (Query.ToArray().Count() == 0)
-                result.Rows.Add("", "", "", "", "","", "", "", "", 0, "",0, "","","",""); // to allow column name to be generated properly for empty data as template
+                result.Rows.Add("", "", "", "", "","", "", "", "", 0, "",0, ""); // to allow column name to be generated properly for empty data as template
             else
             {
                 int index = 0;
@@ -726,10 +726,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
 
                     //DateTimeOffset date = item.date ?? new DateTime(1970, 1, 1);
                     //string dateString = date == new DateTime(1970, 1, 1) ? "-" : date.ToOffset(new TimeSpan(offset, 0, 0)).ToString("dd MMM yyyy", new CultureInfo("id-ID"));
-                    result.Rows.Add(index, item.ReceiptNoteNo, item.ReceiptDate.AddHours(offset).ToString("dd MMM yyyy", new CultureInfo("id-ID")), item.UnitFromCode, item.ExpenditureGoodNo, item.RONo, item.UnitComodityCode, item.ComodityCode, item.ComodityName, item.Quantity, item.UomUnit, item.Price, pos, no, date, type);
+                    result.Rows.Add(index, item.ReceiptNoteNo, item.ReceiptDate.AddHours(offset).ToString("dd MMM yyyy", new CultureInfo("id-ID")), item.UnitFromCode, item.ExpenditureGoodNo, item.RONo, item.UnitComodityCode, item.ComodityCode, item.ComodityName, item.Quantity, item.UomUnit, item.Price, pos);
                 }
 
-                result.Rows.Add("" , "T O T A L .......", "", "", "", "", "", "", "", QtyTotal, "", PriceTotal, "", "", "" , "");
+                result.Rows.Add("" , "T O T A L .......", "", "", "", "", "", "", "", QtyTotal, "", PriceTotal, "");
             }
 
             ExcelPackage package = new ExcelPackage();
