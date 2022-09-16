@@ -172,7 +172,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             result.Columns.Add(new DataColumn() { ColumnName = "Tgl Bon Terima", DataType = typeof(string) });
             result.Columns.Add(new DataColumn() { ColumnName = "Jenis Aval", DataType = typeof(string) });
             //result.Columns.Add(new DataColumn() { ColumnName = "Berat", DataType = typeof(string) });
-            result.Columns.Add(new DataColumn() { ColumnName = "Satuan", DataType = typeof(string) });
+            //result.Columns.Add(new DataColumn() { ColumnName = "Satuan", DataType = typeof(string) });
             result.Columns.Add(new DataColumn() { ColumnName = "Asal Barang", DataType = typeof(string) });
             result.Columns.Add(new DataColumn() { ColumnName = "Nomor RO", DataType = typeof(string) });
             result.Columns.Add(new DataColumn() { ColumnName = "Kode Barang", DataType = typeof(string) });
@@ -187,7 +187,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             int idx = 1;
             var rCount = 0;
             if (Query.ToArray().Count() == 0)
-                result.Rows.Add("", "", "", "", "", "", "", "", "", "", "", "", ""); // to allow column name to be generated properly for empty data as template
+                result.Rows.Add("", "", "", "", "", "", "", "", "", "", "", ""); // to allow column name to be generated properly for empty data as template
             else
             {
                 //int index = 0;
@@ -214,12 +214,12 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     string ReceiptDate = item.ReceiptDate == new DateTime(1970, 1, 1) ? "-" : item.ReceiptDate.ToOffset(new TimeSpan(offset, 0, 0)).ToString("dd MMMM yyyy", new CultureInfo("id-ID"));
                     string Weight = item.Weight == 0 ? "-" : item.Weight.ToString();
                     
-                    result.Rows.Add(item.index, item.ReceiptNoteNo, ReceiptDate, item.AvalType, item.Uom, item.UnitCode
+                    result.Rows.Add(item.index, item.ReceiptNoteNo, ReceiptDate, item.AvalType, item.UnitCode
                         , item.RONo, item.ProductCode, item.ProductName, item.Remark, item.Quantity, item.UomUnit, item.AvalComponentNo);
 
                 }
 
-                result.Rows.Add("", "T O T A L . . . .", "", "", "", ""
+                result.Rows.Add("", "T O T A L . . . .", "", "", ""
                         , "", "", "", "", QtyTotal, "", "");
             }
             ExcelPackage package = new ExcelPackage();
@@ -261,9 +261,9 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                 sheet.Cells[$"E{rowNum1}:E{rowNum2}"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
                 sheet.Cells[$"E{rowNum1}:E{rowNum2}"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
 
-                sheet.Cells[$"F{rowNum1}:F{rowNum2}"].Merge = true;
-                sheet.Cells[$"F{rowNum1}:F{rowNum2}"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-                sheet.Cells[$"F{rowNum1}:F{rowNum2}"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                //sheet.Cells[$"F{rowNum1}:F{rowNum2}"].Merge = true;
+                //sheet.Cells[$"F{rowNum1}:F{rowNum2}"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                //sheet.Cells[$"F{rowNum1}:F{rowNum2}"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
 
                 //sheet.Cells[$"G{rowNum1}:G{rowNum2}"].Merge = true;
                 //sheet.Cells[$"G{rowNum1}:G{rowNum2}"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
