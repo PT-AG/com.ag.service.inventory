@@ -63,10 +63,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.ViewModels.GarmentLeftoverWarehou
                     yield return new ValidationResult("Keterangan Lain-lain tidak boleh kosong", new List<string> { "EtcRemark" });
                 }
 
-                if(QtyKG <= 0)
-                {
-                    yield return new ValidationResult("Jumlah Keluar Tidak Boleh Kosong", new List<string> { "QtyKG" });
-                }
+                //if(QtyKG <= 0)
+                //{
+                //    yield return new ValidationResult("Jumlah Keluar Tidak Boleh Kosong", new List<string> { "QtyKG" });
+                //}
             }
 
             if (Items == null || Items.Count < 1)
