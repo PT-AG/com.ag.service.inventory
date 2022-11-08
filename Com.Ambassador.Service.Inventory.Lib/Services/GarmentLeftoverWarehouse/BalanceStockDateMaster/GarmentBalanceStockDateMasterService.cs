@@ -19,11 +19,10 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
 
         private InventoryDbContext DbContext;
         private DbSet<GarmentBalanceStockDateMaster> DbSet;
-
         private readonly IServiceProvider ServiceProvider;
         private readonly IIdentityService IdentityService;
 
-       
+
         public GarmentBalanceStockDateMasterService(InventoryDbContext dbContext, IServiceProvider serviceProvider)
         {
             DbContext = dbContext;
@@ -32,7 +31,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             ServiceProvider = serviceProvider;
             IdentityService = (IIdentityService)serviceProvider.GetService(typeof(IIdentityService));
 
-     }
+        }
 
         public async Task<int> CreateAsync(GarmentBalanceStockDateMaster model)
         {
@@ -45,7 +44,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     model.FlagForCreate(IdentityService.Username, UserAgent);
                     model.FlagForUpdate(IdentityService.Username, UserAgent);
 
-                   
+
                     DbSet.Add(model);
                     Created = await DbContext.SaveChangesAsync();
 
@@ -71,7 +70,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             GarmentBalanceStockDateMaster model = new GarmentBalanceStockDateMaster();
             PropertyCopier<GarmentBalanceStockDateMasterViewModel, GarmentBalanceStockDateMaster>.Copy(viewModel, model);
 
-        
+
             return model;
         }
 
@@ -80,7 +79,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             GarmentBalanceStockDateMasterViewModel viewModel = new GarmentBalanceStockDateMasterViewModel();
             PropertyCopier<GarmentBalanceStockDateMaster, GarmentBalanceStockDateMasterViewModel>.Copy(model, viewModel);
 
-          
+
             return viewModel;
         }
 
@@ -131,5 +130,6 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
         {
             throw new NotImplementedException();
         }
+
     }
 }
