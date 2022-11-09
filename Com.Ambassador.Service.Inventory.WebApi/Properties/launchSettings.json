@@ -17,7 +17,6 @@
     },
     "Com.Ambassador.Service.Inventory.WebApi": {
       "commandName": "Project",
-      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

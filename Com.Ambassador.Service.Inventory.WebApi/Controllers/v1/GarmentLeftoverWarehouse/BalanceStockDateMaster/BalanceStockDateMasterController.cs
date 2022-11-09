@@ -14,11 +14,11 @@ namespace Com.Ambassador.Service.Inventory.WebApi.Controllers.v1.GarmentLeftover
 {
     [Produces("application/json")]
     [ApiVersion("1.0")]
-    [Route("v{version:apiVersion}/garment/leftover-warehouse/balance-stock-date-master")]
+    [Route("v{version:apiVersion}/balance-stock-date-master")]
     [Authorize]
-    public class GarmentLeftoverWarehouseBalanceStockController : BaseController<GarmentBalanceStockDateMaster, GarmentBalanceStockDateMasterViewModel, IGarmentBalanceStockDateMasterService>
+    public class GarmentBalanceStockDateMasterController : BaseController<GarmentBalanceStockDateMaster, GarmentBalanceStockDateMasterViewModel, IGarmentBalanceStockDateMasterService>
     {
-        public GarmentLeftoverWarehouseBalanceStockController(IIdentityService identityService, IValidateService validateService, IGarmentBalanceStockDateMasterService service) : base(identityService, validateService, service, "1.0.0")
+        public GarmentBalanceStockDateMasterController(IIdentityService identityService, IValidateService validateService, IGarmentBalanceStockDateMasterService service) : base(identityService, validateService, service, "1.0.0")
         {
         }
     }

@@ -9,7 +9,6 @@ namespace Com.Ambassador.Service.Inventory.Lib.ViewModels.GarmentLeftoverWarehou
     public class GarmentBalanceStockDateMasterViewModel : BasicViewModel, IValidatableObject
     {
         public DateTimeOffset? BalanceStockDate { get; set; }
-         
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
