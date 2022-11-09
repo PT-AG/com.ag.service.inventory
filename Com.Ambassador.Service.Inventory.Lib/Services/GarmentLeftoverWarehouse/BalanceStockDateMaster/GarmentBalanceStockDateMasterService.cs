@@ -121,10 +121,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
 
         public async Task<GarmentBalanceStockDateMaster> ReadByIdAsync(int id)
         {
-            return await DbSet
-                .Where(w => w.Id == id)
-
-                .FirstOrDefaultAsync();
+            throw new NotImplementedException();
         }
 
         public Task<int> UpdateAsync(int id, GarmentBalanceStockDateMaster model)
