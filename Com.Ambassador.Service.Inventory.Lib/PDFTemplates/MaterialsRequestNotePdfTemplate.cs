@@ -42,7 +42,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.PDFTemplates
 
             //LEFT
             cb.SetFontAndSize(bf_bold, 14);
-            cb.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "PT DAN LIRIS", 100, 550, 0);
+            cb.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "PT AMBASSADOR GARMINDO", 100, 550, 0);
             cb.SetFontAndSize(bf, 10);
             cb.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "INDUSTRIAL & TRADING CO.LTD", 100, 535, 0);
             cb.SetFontAndSize(bf, 9);
