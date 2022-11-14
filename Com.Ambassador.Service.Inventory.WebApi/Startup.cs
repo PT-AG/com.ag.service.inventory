@@ -53,6 +53,7 @@ using Com.Ambassador.Service.Inventory.Lib.Services.InventoryWeaving.Reports.Rep
 using Com.Ambassador.Service.Inventory.Lib.Services.InventoryWeaving.Reports.ReportExpenseGreigeWeaving;
 using Com.Ambassador.Service.Inventory.Lib.Services.InventoryWeaving.Reports.ReportExpenseRecapGreigeWeaving;
 using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.Report.AvalMutation;
+using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.BalanceStockDateMaster;
 
 namespace Com.Ambassador.Service.Inventory.WebApi
 {
@@ -142,6 +143,7 @@ namespace Com.Ambassador.Service.Inventory.WebApi
                 .AddTransient<IReportExpenseRecapGreigeWeavingService, ReportExpenseRecapGreigeWeavingService>()
                 .AddTransient<IInventoryWeavingDocumentAdjService, InventoryWeavingDocumentAdjService>()
                 .AddTransient<IGarmentLeftoverWarehouseAvalMutationReportService, GarmentLeftoverWarehouseAvalMutationReportService>()
+                .AddTransient<IGarmentBalanceStockDateMasterService, GarmentBalanceStockDateMasterService>()
                 .AddScoped<IIdentityService, IdentityService>()
                 .AddScoped<IValidateService, ValidateService>()
                 .AddScoped<IHttpService, HttpService>()

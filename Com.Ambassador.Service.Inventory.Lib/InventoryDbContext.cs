@@ -34,6 +34,7 @@ using Com.Ambassador.Service.Inventory.Lib.Models.GarmentLeftoverWarehouse.Balan
 using Com.Ambassador.Service.Inventory.Lib.Configs.GarmentLeftoverWarehouse.BalanceStock;
 using Com.Ambassador.Service.Inventory.Lib.Models.InventoryWeavingModel;
 using Com.Ambassador.Service.Inventory.Lib.Configs.InventoryWeavingsConfig;
+using Com.Ambassador.Service.Inventory.Lib.Models.GarmentLeftoverWarehouse.BalanceStockDateMaster;
 
 namespace Com.Ambassador.Service.Inventory.Lib
 {
@@ -87,6 +88,7 @@ namespace Com.Ambassador.Service.Inventory.Lib
         public DbSet<GarmentLeftoverWarehouseReceiptAccessoryItem> GarmentLeftoverWarehouseReceiptAccessoryItems { get; set; }
 
         public DbSet<GarmentLeftoverWarehouseBalanceStock> GarmentLeftoverWarehouseBalanceStocks { get; set; }
+        public DbSet<GarmentBalanceStockDateMaster> GarmentBalanceStockDateMasters { get; set; }
         public DbSet<GarmentLeftoverWarehouseBalanceStockItem> GarmentLeftoverWarehouseBalanceStocksItems { get; set; }
         public DbSet<InventoryWeavingDocument> InventoryWeavingDocuments { get; set; }
         public DbSet<InventoryWeavingDocumentItem> InventoryWeavingDocumentItems { get; set; }
