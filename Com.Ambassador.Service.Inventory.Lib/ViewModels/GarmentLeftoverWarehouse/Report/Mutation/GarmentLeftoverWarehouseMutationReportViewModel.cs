@@ -17,5 +17,6 @@ namespace Com.Ambassador.Service.Inventory.Lib.ViewModels.GarmentLeftoverWarehou
         public double StockOpname { get; set; }
         public double Selisih { get; set; }
         public double SaldoAkhir { get; set; }
+        public string RoNo { get; set; }
     }
 }
