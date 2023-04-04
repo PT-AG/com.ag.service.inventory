@@ -116,8 +116,8 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             var SAReceiptAval = (from a in DbContext.GarmentLeftoverWarehouseReceiptAvals
                                  join b in DbContext.GarmentLeftoverWarehouseReceiptAvalItems on a.Id equals b.AvalReceiptId
                                  where a._IsDeleted == false && b._IsDeleted == false
-                                 && a.ReceiptDate > BalanceDate
-                                 && a.ReceiptDate < DateFrom
+                                 && a.ReceiptDate.AddHours(7) > BalanceDate
+                                 && a.ReceiptDate.AddHours(7) < DateFrom
                                  && a.AvalType == "AVAL FABRIC"
                                  select new GarmentLeftoverWarehouseMutationReportViewModel
                                  {
@@ -187,8 +187,8 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                          join b in DbContext.GarmentLeftoverWarehouseReceiptAvalItems on a.Id equals b.AvalReceiptId
                                          where a._IsDeleted == false
                                          && b._IsDeleted == false
-                                         && a.ReceiptDate > BalanceDate
-                                         && a.ReceiptDate < DateFrom
+                                         && a.ReceiptDate.AddHours(7) > BalanceDate
+                                         && a.ReceiptDate.AddHours(7) < DateFrom
                                          && a.AvalType == "AVAL KOMPONEN"
                                          select new
                                          {
@@ -258,8 +258,8 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                 join c in DbContext.GarmentLeftoverWarehouseReceiptAvals on b.AvalReceiptId equals c.Id
                                 join d in DbContext.GarmentLeftoverWarehouseReceiptAvalItems on c.Id equals d.AvalReceiptId
                                 where a._IsDeleted == false && b._IsDeleted == false && c._IsDeleted == false && d._IsDeleted == false
-                                && a.ExpenditureDate > BalanceDate
-                                && a.ExpenditureDate < DateFrom
+                                && a.ExpenditureDate.AddHours(7) > BalanceDate
+                                && a.ExpenditureDate.AddHours(7) < DateFrom
                                 && a.AvalType == "AVAL FABRIC"
                                 select new GarmentLeftoverWarehouseMutationReportViewModel
                                 {
@@ -296,8 +296,8 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                      join c in DbContext.GarmentLeftoverWarehouseReceiptAvals on b.AvalReceiptId equals c.Id
                                      join d in DbContext.GarmentLeftoverWarehouseReceiptAvalItems on c.Id equals d.AvalReceiptId
                                      where a._IsDeleted == false && b._IsDeleted == false && c._IsDeleted == false && d._IsDeleted == false
-                                && a.ExpenditureDate > BalanceDate
-                                && a.ExpenditureDate < DateFrom
+                                && a.ExpenditureDate.AddHours(7) > BalanceDate
+                                && a.ExpenditureDate.AddHours(7) < DateFrom
                                 && a.AvalType == "AVAL KOMPONEN"
                                 select new GarmentLeftoverWarehouseMutationReportViewModel
                                 {
@@ -424,8 +424,8 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             var FilteredReceiptAval = (from a in DbContext.GarmentLeftoverWarehouseReceiptAvals
                                        join b in DbContext.GarmentLeftoverWarehouseReceiptAvalItems on a.Id equals b.AvalReceiptId
                                        where a._IsDeleted == false && b._IsDeleted == false
-                                       && a.ReceiptDate >= DateFrom
-                                       && a.ReceiptDate <= DateTo
+                                       && a.ReceiptDate.AddHours(7) >= DateFrom
+                                       && a.ReceiptDate.AddHours(7) <= DateTo
                                        && a.AvalType == "AVAL FABRIC"
                                        select new GarmentLeftoverWarehouseMutationReportViewModel
                                        {
@@ -459,8 +459,8 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                                join b in DbContext.GarmentLeftoverWarehouseReceiptAvalItems on a.Id equals b.AvalReceiptId
                                                where a._IsDeleted == false
                                                && b._IsDeleted == false
-                                               && a.ReceiptDate >= DateFrom
-                                               && a.ReceiptDate <= DateTo
+                                               && a.ReceiptDate.AddHours(7) >= DateFrom
+                                               && a.ReceiptDate.AddHours(7) <= DateTo
                                                && a.AvalType == "AVAL KOMPONEN"
                                                select new GarmentLeftoverWarehouseMutationReportViewModel
                                                {
@@ -528,8 +528,8 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                       join c in DbContext.GarmentLeftoverWarehouseReceiptAvals on b.AvalReceiptId equals c.Id
                                       join d in DbContext.GarmentLeftoverWarehouseReceiptAvalItems on c.Id equals d.AvalReceiptId
                                       where a._IsDeleted == false && b._IsDeleted == false && c._IsDeleted == false && d._IsDeleted == false
-                                      && a.ExpenditureDate >= DateFrom
-                                      && a.ExpenditureDate <= DateTo
+                                      && a.ExpenditureDate.AddHours(7) >= DateFrom
+                                      && a.ExpenditureDate.AddHours(7) <= DateTo
                                       && a.AvalType == "AVAL FABRIC"
                                       select new GarmentLeftoverWarehouseMutationReportViewModel
                                       {
@@ -565,8 +565,8 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                                           join c in DbContext.GarmentLeftoverWarehouseReceiptAvals on b.AvalReceiptId equals c.Id
                                           join d in DbContext.GarmentLeftoverWarehouseReceiptAvalItems on c.Id equals d.AvalReceiptId
                                           where a._IsDeleted == false && b._IsDeleted == false && c._IsDeleted == false && d._IsDeleted == false
-                                      && a.ExpenditureDate >= DateFrom
-                                      && a.ExpenditureDate <= DateTo
+                                      && a.ExpenditureDate.AddHours(7) >= DateFrom
+                                      && a.ExpenditureDate.AddHours(7) <= DateTo
                                       && a.AvalType == "AVAL KOMPONEN"
                                       select new GarmentLeftoverWarehouseMutationReportViewModel
                                       {
