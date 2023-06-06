@@ -39,6 +39,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
         private readonly string GarmentExpenditureGoodUri;
         private readonly string GarmentUnitDeliveryOrder;
         private readonly string GarmentCustomsUri;
+        private readonly string GarmentSampleExpenditureGoodUri;
 
         public GarmentLeftoverWarehouseReceiptFinishedGoodService(InventoryDbContext dbContext, IServiceProvider serviceProvider)
         {
@@ -50,6 +51,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
 
             StockService = (IGarmentLeftoverWarehouseStockService)serviceProvider.GetService(typeof(IGarmentLeftoverWarehouseStockService));
             GarmentExpenditureGoodUri = APIEndpoint.GarmentProduction + "expenditure-goods/";
+            GarmentSampleExpenditureGoodUri = APIEndpoint.GarmentProduction + "garment-sample-expenditure-goods/";
             GarmentUnitDeliveryOrder = APIEndpoint.Purchasing + "garment-unit-delivery-orders/leftoverwarehouse";
             GarmentCustomsUri = APIEndpoint.Purchasing + "garment-beacukai/by-poserialnumbers";
         }
@@ -256,7 +258,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                             BasicPrice = item.BasicPrice
                         };
                         await StockService.StockIn(stock, model.FinishedGoodReceiptNo, model.Id, item.Id);
-                        await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "true");
+                        //await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "true");
+                        if (model.UnitFromCode != "SMP1")
+                        {
+                            await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "true");
+                        }
+                        else
+                        {
+                            await UpdateExpenditureGoodSampleIsReceived(item.ExpenditureGoodId, "true");
+                        }
                     }
 
 
@@ -314,7 +324,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         if (item == null)
                         {
                             existingItem.FlagForDelete(IdentityService.Username, UserAgent);
-                            await UpdateExpenditureGoodIsReceived(existingItem.ExpenditureGoodId, "false");
+                            //await UpdateExpenditureGoodIsReceived(existingItem.ExpenditureGoodId, "false");
+                            if (model.UnitFromCode != "SMP1")
+                            {
+                                await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "false");
+                            }
+                            else
+                            {
+                                await UpdateExpenditureGoodSampleIsReceived(item.ExpenditureGoodId, "true");
+                            }
                         }
                         else
                         {
@@ -329,7 +347,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     foreach (var item in model.Items.Where(i => i.Id == 0))
                     {
                         item.FlagForCreate(IdentityService.Username, UserAgent);
-                        await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "true");
+                        //await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "true");
+                        if (model.UnitFromCode != "SMP1")
+                        {
+                            await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "true");
+                        }
+                        else
+                        {
+                            await UpdateExpenditureGoodSampleIsReceived(item.ExpenditureGoodId, "true");
+                        }
                         item.FlagForUpdate(IdentityService.Username, UserAgent);
                         existingModel.Items.Add(item);
                     }
@@ -403,7 +429,15 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                         };
 
                         await StockService.StockOut(stock, model.FinishedGoodReceiptNo, model.Id, item.Id);
-                        await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "false");
+                        //await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "false");
+                        if (model.UnitFromCode != "SMP1")
+                        {
+                            await UpdateExpenditureGoodIsReceived(item.ExpenditureGoodId, "false");
+                        }
+                        else
+                        {
+                            await UpdateExpenditureGoodSampleIsReceived(item.ExpenditureGoodId, "false");
+                        }
                     }
 
 
@@ -431,6 +465,24 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
             var curNo = $"{prefix}{(lastNo + 1).ToString("D4")}";
 
             return curNo;
+        }
+
+        private async Task UpdateExpenditureGoodSampleIsReceived(Guid ExGoodId, string IsReceived)
+        {
+
+            var stringContentRequest = IsReceived;
+            var httpContentRequest = new StringContent(stringContentRequest, Encoding.UTF8, General.JsonMediaType);
+
+            var httpService = (IHttpService)ServiceProvider.GetService(typeof(IHttpService));
+
+            var response = await httpService.PutAsync(GarmentSampleExpenditureGoodUri + "update-received/" + ExGoodId, httpContentRequest);
+            if (!response.IsSuccessStatusCode)
+            {
+                var contentResponse = await response.Content.ReadAsStringAsync();
+                Dictionary<string, object> result = JsonConvert.DeserializeObject<Dictionary<string, object>>(contentResponse) ?? new Dictionary<string, object>();
+
+                throw new Exception(string.Concat("Error from '", GarmentSampleExpenditureGoodUri, "' : ", (string)result.GetValueOrDefault("error") ?? "- ", ". Message : ", (string)result.GetValueOrDefault("message") ?? "- ", ". Status : ", response.StatusCode, "."));
+            }
         }
 
         private async Task UpdateExpenditureGoodIsReceived(Guid ExGoodId, string IsReceived)
