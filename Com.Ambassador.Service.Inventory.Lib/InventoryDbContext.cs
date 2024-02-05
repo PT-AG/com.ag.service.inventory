@@ -35,6 +35,7 @@ using Com.Ambassador.Service.Inventory.Lib.Configs.GarmentLeftoverWarehouse.Bala
 using Com.Ambassador.Service.Inventory.Lib.Models.InventoryWeavingModel;
 using Com.Ambassador.Service.Inventory.Lib.Configs.InventoryWeavingsConfig;
 using Com.Ambassador.Service.Inventory.Lib.Models.GarmentLeftoverWarehouse.BalanceStockDateMaster;
+using Com.Ambassador.Service.Inventory.Lib.Models.GarmentLeftoverWarehouse.CustomOut;
 
 namespace Com.Ambassador.Service.Inventory.Lib
 {
@@ -93,6 +94,9 @@ namespace Com.Ambassador.Service.Inventory.Lib
         public DbSet<InventoryWeavingDocument> InventoryWeavingDocuments { get; set; }
         public DbSet<InventoryWeavingDocumentItem> InventoryWeavingDocumentItems { get; set; }
         public DbSet<InventoryWeavingMovement> InventoryWeavingMovements { get; set; }
+
+        public DbSet<CustomsOutModel> GarmentLeftoverWarehouseAvalsCustomsOuts { get; set; }
+        public DbSet<CustomsOutItemModel> GarmentLeftoverWarehouseAvalsCustomsOutItems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
