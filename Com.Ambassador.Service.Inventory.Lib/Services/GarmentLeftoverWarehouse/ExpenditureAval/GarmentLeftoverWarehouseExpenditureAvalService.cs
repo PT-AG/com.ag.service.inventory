@@ -307,7 +307,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
 
         public ReadResponse<GarmentLeftoverWarehouseExpenditureAval> Read(int page, int size, string order, List<string> select, string keyword, string filter)
         {
-            IQueryable<GarmentLeftoverWarehouseExpenditureAval> Query = DbSet;
+            IQueryable<GarmentLeftoverWarehouseExpenditureAval> Query = DbSet.Include(x => x.Items);
 
             List<string> SearchAttributes = new List<string>()
             {
@@ -323,7 +323,7 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
 
             List<string> SelectedFields = (select != null && select.Count > 0) ? select : new List<string>()
             {
-                "Id", "AvalExpenditureNo", "Buyer", "AvalType", "OtherDescription", "ExpenditureTo","ExpenditureDate"
+                "Id", "AvalExpenditureNo", "Buyer", "AvalType", "OtherDescription", "ExpenditureTo","ExpenditureDate","Items"
             };
 
             Query = Query.Select(s => new GarmentLeftoverWarehouseExpenditureAval
@@ -336,7 +336,8 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                 BuyerId = s.BuyerId,
                 BuyerName = s.BuyerName,
                 OtherDescription = s.OtherDescription,
-                AvalType=s.AvalType
+                AvalType=s.AvalType,
+                Items = s.Items,
             });
 
             Pageable<GarmentLeftoverWarehouseExpenditureAval> pageable = new Pageable<GarmentLeftoverWarehouseExpenditureAval>(Query, page - 1, size);

@@ -19,10 +19,20 @@ namespace Com.Ambassador.Service.Inventory.Lib.Models.GarmentLeftoverWarehouse.E
         public string LocalSalesNoteNo { get; set; }
         public int LocalSalesNoteId { get; set; }
         public string Description { get; set; }
+        public bool IsBC { get; set; }
         public virtual ICollection<GarmentLeftoverWarehouseExpenditureAvalItem> Items { get; set; }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             throw new NotImplementedException();
+        }
+
+        public void SetIsBC(bool isBC, string userName, string userAgent)
+        {
+            if(this.IsBC != isBC)
+            {
+                this.IsBC = isBC;
+                this.FlagForUpdate(userName, userAgent);
+            }
         }
     }
 }
