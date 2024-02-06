@@ -54,6 +54,8 @@ using Com.Ambassador.Service.Inventory.Lib.Services.InventoryWeaving.Reports.Rep
 using Com.Ambassador.Service.Inventory.Lib.Services.InventoryWeaving.Reports.ReportExpenseRecapGreigeWeaving;
 using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.Report.AvalMutation;
 using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.BalanceStockDateMaster;
+using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.CustomsOuts;
+using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.CustomsOut;
 
 namespace Com.Ambassador.Service.Inventory.WebApi
 {
@@ -144,6 +146,7 @@ namespace Com.Ambassador.Service.Inventory.WebApi
                 .AddTransient<IInventoryWeavingDocumentAdjService, InventoryWeavingDocumentAdjService>()
                 .AddTransient<IGarmentLeftoverWarehouseAvalMutationReportService, GarmentLeftoverWarehouseAvalMutationReportService>()
                 .AddTransient<IGarmentBalanceStockDateMasterService, GarmentBalanceStockDateMasterService>()
+                .AddTransient<ICustomsOutService, CustomsOutService>()
                 .AddScoped<IIdentityService, IdentityService>()
                 .AddScoped<IValidateService, ValidateService>()
                 .AddScoped<IHttpService, HttpService>()
@@ -249,11 +252,11 @@ namespace Com.Ambassador.Service.Inventory.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<InventoryDbContext>();
-                context.Database.Migrate();
-            }
+            //using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var context = serviceScope.ServiceProvider.GetService<InventoryDbContext>();
+            //    context.Database.Migrate();
+            //}
             app.UseAuthentication();
             app.UseCors("InventoryPolicy");
             app.UseMvc();

@@ -24,6 +24,10 @@
     <Compile Remove="Interfaces\IToModelable.cs" />
     <Compile Remove="Migrations\20210331092957_Adding GarmentLeftOverWarehouseReceiptAccessories.cs" />
     <Compile Remove="Migrations\20210331092957_Adding GarmentLeftOverWarehouseReceiptAccessories.Designer.cs" />
+    <Compile Remove="Migrations\20240205025108_add-Table-AvalCustomsOut.cs" />
+    <Compile Remove="Migrations\20240205025108_add-Table-AvalCustomsOut.Designer.cs" />
+    <Compile Remove="Migrations\20240205043337_add-IsBC-AvalExpenditure.cs" />
+    <Compile Remove="Migrations\20240205043337_add-IsBC-AvalExpenditure.Designer.cs" />
     <Compile Remove="Services\FpRegradingResultDocs\FpRegradingResultDetailsDocsService.cs" />
     <Compile Remove="Services\FpRegradingResultDocs\FpRegradingResultDocsService.cs" />
     <Compile Remove="Services\FPReturnInvToPurchasingService\FPReturnInvToPurchasingDetailService.cs" />
