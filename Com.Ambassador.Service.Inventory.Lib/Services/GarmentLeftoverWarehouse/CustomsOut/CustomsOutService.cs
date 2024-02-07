@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -256,6 +258,60 @@ namespace Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse
                     throw e;
                 }
             }
+        }
+
+        public async Task<List<ReportCustomsOutVM>>GetQuery(DateTime dateFrom,DateTime dateTo)
+        {
+            var Query = (from a in DbSet
+                         join b in DbSetItem on a.Id equals b.CustomsOutId
+                         where a._IsDeleted == false
+                         && a.BCDate.AddHours(7).Date >= dateFrom.Date
+                         && a.BCDate.AddHours(7).Date <= dateTo.Date
+                         select new ReportCustomsOutVM
+                         {
+                             BCNo = a.BCNo,
+                             BCDate = a.BCDate,
+                             ProductCode = b.ProductName,
+                             ProductName = b.ProductName == "AV001" ? "AVAL FABRIC" : b.ProductName == "AV002" ? "AVAL KOMPONEN" : "AVAL BAHAN PENOLONG",
+                             UomUnit = b.UomUnit,
+                             Quantity = b.Quantity,
+                             Price = b.Price
+                         }).Distinct().OrderBy(x => x.BCDate).ToList();
+
+
+            return Query;
+        }
+
+        public async Task<MemoryStream> GenerateExcel(DateTime dateFrom, DateTime dateTo)
+        {
+            var Query = await GetQuery(dateFrom, dateTo);
+
+            DataTable result = new DataTable();
+            result.Columns.Add(new DataColumn() { ColumnName = "No", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Nomor", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Tanggal", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Kode Barang", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Nama Barang", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Satuan", DataType = typeof(String) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Jumlah", DataType = typeof(double) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Nilai", DataType = typeof(double) });
+
+            if (Query.ToArray().Count() == 0)
+            {
+                result.Rows.Add("", "", "", "", "", "", 0, 0); // to allow column name to be generated properly for empty data as template
+            }
+            else
+            {
+                int i = 0;
+                foreach (var item in Query)
+                {
+                    i++;
+                    var bcDate = item.BCDate.ToString("dd MMM yyyy");
+                    result.Rows.Add(i.ToString(), item.BCNo, bcDate, item.ProductCode, item.ProductName, item.UomUnit, item.Quantity, item.Price);
+                }
+            }
+            return Excel.CreateExcel(new List<KeyValuePair<DataTable, string>>() { new KeyValuePair<DataTable, string>(result, "Territory") }, true);
+
         }
     }
 }
