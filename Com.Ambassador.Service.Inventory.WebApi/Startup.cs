@@ -56,6 +56,7 @@ using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.Rep
 using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.BalanceStockDateMaster;
 using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.CustomsOuts;
 using Com.Ambassador.Service.Inventory.Lib.Services.GarmentLeftoverWarehouse.CustomsOut;
+using Com.Ambassador.Service.Inventory.Lib.Services.GarmentReceiptSubconWasteProduction;
 
 namespace Com.Ambassador.Service.Inventory.WebApi
 {
@@ -147,6 +148,8 @@ namespace Com.Ambassador.Service.Inventory.WebApi
                 .AddTransient<IGarmentLeftoverWarehouseAvalMutationReportService, GarmentLeftoverWarehouseAvalMutationReportService>()
                 .AddTransient<IGarmentBalanceStockDateMasterService, GarmentBalanceStockDateMasterService>()
                 .AddTransient<ICustomsOutService, CustomsOutService>()
+                .AddTransient<IGarmentSubconReceiptWasteProductionService, GarmentSubconReceiptWasteProductionService>()
+                .AddTransient<IGarmentSubconExpenditureWasteProductionService, GarmentSubconExpenditureWasteProductionService>()
                 .AddScoped<IIdentityService, IdentityService>()
                 .AddScoped<IValidateService, ValidateService>()
                 .AddScoped<IHttpService, HttpService>()
