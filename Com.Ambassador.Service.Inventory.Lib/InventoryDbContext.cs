@@ -36,6 +36,11 @@ using Com.Ambassador.Service.Inventory.Lib.Models.InventoryWeavingModel;
 using Com.Ambassador.Service.Inventory.Lib.Configs.InventoryWeavingsConfig;
 using Com.Ambassador.Service.Inventory.Lib.Models.GarmentLeftoverWarehouse.BalanceStockDateMaster;
 using Com.Ambassador.Service.Inventory.Lib.Models.GarmentLeftoverWarehouse.CustomOut;
+using Com.Ambassador.Service.Inventory.Lib.Configs.GarmentWasteProductionConfig.GarmentReceiptSubconWasteProductionConfig.ReceiptWaste;
+using Com.Ambassador.Service.Inventory.Lib.Configs.GarmentLeftoverWarehouse.GarmentReceiptSubconWasteProductionConfig.GarmentExpenditureWasteProductionsConfig;
+using Com.Ambassador.Service.Inventory.Lib.Configs.GarmentWasteProductionConfig.GarmentReceiptSubconWasteProductionConfig.ExpenditureWasteConfig;
+using Com.Ambassador.Service.Inventory.Lib.Models.GarmentReceiptSubconWasteProduction.ReceiptWaste;
+using Com.Ambassador.Service.Inventory.Lib.Models.GarmentReceiptSubconWasteProduction.ExpenditureWaste;
 
 namespace Com.Ambassador.Service.Inventory.Lib
 {
@@ -98,6 +103,10 @@ namespace Com.Ambassador.Service.Inventory.Lib
         public DbSet<CustomsOutModel> GarmentLeftoverWarehouseAvalsCustomsOuts { get; set; }
         public DbSet<CustomsOutItemModel> GarmentLeftoverWarehouseAvalsCustomsOutItems { get; set; }
 
+        public DbSet<GarmentSubconReceiptWasteProductions> GarmentSubconReceiptWasteProductions { get; set; }
+        public DbSet<GarmentSubconReceiptWasteProductionItems> GarmentSubconReceiptWasteProductionItems { get; set; }
+        public DbSet<GarmentSubconExpenditureWasteProductions> GarmentSubconExpenditureWasteProductions { get; set; }
+        public DbSet<GarmentSubconExpenditureWasteProductionItems> GarmentSubconExpenditureWasteProductionItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -146,6 +155,11 @@ namespace Com.Ambassador.Service.Inventory.Lib
             modelBuilder.ApplyConfiguration(new InventoryWeavingDocumentConfig());
             modelBuilder.ApplyConfiguration(new InventoryWeavingDocumentItemConfig());
             modelBuilder.ApplyConfiguration(new InventoryWeavingMovementConfig());
+
+            modelBuilder.ApplyConfiguration(new GarmentSubconReceiptWasteProductionConfig());
+            modelBuilder.ApplyConfiguration(new GarmentSubconReceiptWasteProductionItemConfig());
+            modelBuilder.ApplyConfiguration(new GarmentSubconExpenditureWasteProductionsConfig());
+            modelBuilder.ApplyConfiguration(new GarmentSubconExpenditureWasteProductionsItemConfig());
         }
     }
 }
